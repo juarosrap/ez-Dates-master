@@ -1,0 +1,7 @@
+nav.navbar {
+    background-color: rgb(202, 202, 202);
+}
+
+nav.navbar a {
+    color: rgb(41, 41, 41) !important;
+}
