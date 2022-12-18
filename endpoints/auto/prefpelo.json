@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'prefpelo'",
+        "route": "/prefpelo",
+        "method": "GET",
+        "sql": "SELECT * FROM prefpelo",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'prefpelo' by its primary key",
+        "route": "/prefpelo/$prefPeloId",
+        "method": "GET",
+        "sql": "SELECT FROM prefpelo WHERE prefPeloId = $prefPeloId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'prefpelo'",
+        "route": "/prefpelo",
+        "method": "POST",
+        "sql": "INSERT INTO prefpelo (preferenciaId, pelo) VALUES ($preferenciaId, $pelo)",
+        "request_body_params": [
+            "preferenciaId",
+            "pelo"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'prefpelo' by its primary key",
+        "route": "/prefpelo/$prefPeloId",
+        "method": "PUT",
+        "sql": "UPDATE prefpelo SET preferenciaId = $preferenciaId, pelo = $pelo WHERE prefPeloId = $prefPeloId",
+        "request_body_params": [
+            "preferenciaId",
+            "pelo"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'prefpelo' by its primary key",
+        "route": "/prefpelo/$prefPeloId",
+        "method": "DELETE",
+        "sql": "DELETE FROM prefpelo WHERE prefPeloId = $prefPeloId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

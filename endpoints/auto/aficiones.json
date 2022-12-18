@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'aficiones'",
+        "route": "/aficiones",
+        "method": "GET",
+        "sql": "SELECT * FROM aficiones",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'aficiones' by its primary key",
+        "route": "/aficiones/$aficionesId",
+        "method": "GET",
+        "sql": "SELECT FROM aficiones WHERE aficionesId = $aficionesId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'aficiones'",
+        "route": "/aficiones",
+        "method": "POST",
+        "sql": "INSERT INTO aficiones (nombre, usuarioId) VALUES ($nombre, $usuarioId)",
+        "request_body_params": [
+            "nombre",
+            "usuarioId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'aficiones' by its primary key",
+        "route": "/aficiones/$aficionesId",
+        "method": "PUT",
+        "sql": "UPDATE aficiones SET nombre = $nombre, usuarioId = $usuarioId WHERE aficionesId = $aficionesId",
+        "request_body_params": [
+            "nombre",
+            "usuarioId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'aficiones' by its primary key",
+        "route": "/aficiones/$aficionesId",
+        "method": "DELETE",
+        "sql": "DELETE FROM aficiones WHERE aficionesId = $aficionesId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

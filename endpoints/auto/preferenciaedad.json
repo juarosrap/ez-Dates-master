@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'prefedad'",
+        "route": "/prefedad",
+        "method": "GET",
+        "sql": "SELECT * FROM prefedad",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'prefedad' by its primary key",
+        "route": "/prefedad/$prefEdadId",
+        "method": "GET",
+        "sql": "SELECT FROM prefedad WHERE prefEdadId = $prefEdadId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'prefedad'",
+        "route": "/prefedad",
+        "method": "POST",
+        "sql": "INSERT INTO prefedad (preferenciaId, MaximaEdad, MinimaEdad) VALUES ($preferenciaId, $MaximaEdad, $MinimaEdad)",
+        "request_body_params": [
+            "preferenciaId",
+            "MaximaEdad",
+            "MinimaEdad"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'prefedad' by its primary key",
+        "route": "/prefedad/$prefEdadId",
+        "method": "PUT",
+        "sql": "UPDATE prefedad SET preferenciaId = $preferenciaId, MaximaEdad = $MaximaEdad, MinimaEdad = $MinimaEdad WHERE prefEdadId = $prefEdadId",
+        "request_body_params": [
+            "preferenciaId",
+            "MaximaEdad",
+            "MinimaEdad"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'prefedad' by its primary key",
+        "route": "/prefedad/$prefEdadId",
+        "method": "DELETE",
+        "sql": "DELETE FROM prefedad WHERE prefEdadId = $prefEdadId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

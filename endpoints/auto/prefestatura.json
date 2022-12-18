@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'prefestatura'",
+        "route": "/prefestatura",
+        "method": "GET",
+        "sql": "SELECT * FROM prefestatura",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'prefestatura' by its primary key",
+        "route": "/prefestatura/$prefEstaturaId",
+        "method": "GET",
+        "sql": "SELECT * FROM prefestatura WHERE prefEstaturaId = $prefEstaturaId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'prefestatura'",
+        "route": "/prefestatura",
+        "method": "POST",
+        "sql": "INSERT INTO prefestatura (preferenciaId, MaximaEst, MinimaEst) VALUES ($preferenciaId, $MaximaEst, $MinimaEst)",
+        "request_body_params": [
+            "preferenciaId",
+            "MaximaEst",
+            "MinimaEst"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'prefestatura' by its primary key",
+        "route": "/prefestatura/$prefEstaturaId",
+        "method": "PUT",
+        "sql": "UPDATE prefestatura SET preferenciaId = $preferenciaId, MaximaEst = $MaximaEst, MinimaEst = $MinimaEst WHERE prefEstaturaId = $prefEstaturaId",
+        "request_body_params": [
+            "preferenciaId",
+            "MaximaEst",
+            "MinimaEst"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'prefestatura' by its primary key",
+        "route": "/prefestatura/$prefEstaturaId",
+        "method": "DELETE",
+        "sql": "DELETE FROM prefestatura WHERE prefEstaturaId = $prefEstaturaId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

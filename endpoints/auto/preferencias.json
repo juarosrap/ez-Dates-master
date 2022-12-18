@@ -1,0 +1,58 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'preferencias'",
+        "route": "/preferencias",
+        "method": "GET",
+        "sql": "SELECT * FROM preferencias",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'preferencias' by its primary key",
+        "route": "/preferencias/$preferenciaId",
+        "method": "GET",
+        "sql": "SELECT FROM preferencias WHERE preferenciaId = $preferenciaId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'preferencias'",
+        "route": "/preferencias",
+        "method": "POST",
+        "sql": "INSERT INTO preferencias (usuarioId) VALUES ($usuarioId)",
+        "request_body_params": [
+            "usuarioId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'preferencias' by its primary key",
+        "route": "/preferencias/$preferenciaId",
+        "method": "PUT",
+        "sql": "UPDATE preferencias SET usuarioId = $usuarioId WHERE preferenciaId = $preferenciaId",
+        "request_body_params": [
+            "usuarioId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'preferencias' by its primary key",
+        "route": "/preferencias/$preferenciaId",
+        "method": "DELETE",
+        "sql": "DELETE FROM preferencias WHERE preferenciaId = $preferenciaId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

@@ -1,0 +1,241 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8080/api/v1/
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing usuarios
+### This query is used in several of the below tests it should be executed first.
+# @name usuarios
+GET {{BASE}}/usuarios
+
+### Login a(n) usuarios and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+POST {{BASE}}/register 
+Content-Type: application/json 
+
+{
+	"nombre": "Carlos",
+    "fechaNacimiento": "1998-4-3",
+    "numeroTlf": 111111111,
+    "idioma": "Español",
+    "estatura": 185,
+    "peso": 70.00,
+    "genero": "Masculino",
+    "email": "carl@gmail.com",
+    "contrasenya": "5497",
+    "fechaDeAlta": "2000-10-04",
+    "fechaDeBaja": null,
+    "colorPelo": "Rubio",
+    "colorOjos": "Azules",
+    "biografia": "Apasionado a la musica",
+    "orientacionSexual": "Heterosexual",
+    "metodoPago": "Paypal",
+    "activo": 1,
+    "redesSociales": "carss",
+    "direccionId": 2
+} 
+###
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"email": "carl@gmail.com",
+	"contrasenya":"5497"
+	}
+
+
+###
+@token = ".eJxFUV1v1DAQ_CtR1MdetfYlueSeaGklQAKOtvDEy8ZeX10cO_IH4kD899o-Ffy2s7M7s-M_LYqof7p237DLpp21O3pUGnPdXq8YtLMoXYONwWZJQQtsM0044_znZxcq7XcyFP7BBzJlW3uf8rIzaqPHQPZUt67zD6n4Pjwh74c9HyC_C3a7fuHwAeZvd6eo09cLybiapEIGtNuKDmFgfT_QbmIdbCUfWacIeuqwU_M4Sxi7aZ5x6EAiKOSsCEvtSYh8wXuZhXlGaEFtigmB3rw5lupKuKWQKUSMyReLbOwzoEg84S1dm1ht82xzw2ADXfu_eYPPpWmTMa_gJxR60WRjDYFN05hHNrAtU0ey5Cv-EYNIRtsakJbaLVXkLqz4PQEo5kzpLBSddAc81qEDnlasuHXL7Klgb_MhroZv05KXPxpVLnh9GXe-uMGSwwP9Sljvf0cxk8O5zqSVQpHYwRXkypOk8OCExvKx57hCFUkhodeuBsp2f18Asqetbg.Y58lbg.cjmvdX94wJWZQS1mkhCzAZGpF18"
+
+### Test 01: Get one existing usuarios by its id.
+### positive test 
+@usuId = 2
+GET {{BASE}}/usuarios/{{usuId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing usuarios by its nonexistent id.
+### negative test 
+GET {{BASE}}/usuarios/999989999
+Content-Type: application/json 
+
+
+### Test 03: Add a new usuarios successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newusuarios
+POST {{BASE}}/usuarios 
+Content-Type: application/json
+Token: .eJxFUV1v1DAQ_CtR1MdetfYlueSeaGklQAKOtvDEy8ZeX10cO_IH4kD899o-Ffy2s7M7s-M_LYqof7p237DLpp21O3pUGnPdXq8YtLMoXYONwWZJQQtsM0044_znZxcq7XcyFP7BBzJlW3uf8rIzaqPHQPZUt67zD6n4Pjwh74c9HyC_C3a7fuHwAeZvd6eo09cLybiapEIGtNuKDmFgfT_QbmIdbCUfWacIeuqwU_M4Sxi7aZ5x6EAiKOSsCEvtSYh8wXuZhXlGaEFtigmB3rw5lupKuKWQKUSMyReLbOwzoEg84S1dm1ht82xzw2ADXfu_eYPPpWmTMa_gJxR60WRjDYFN05hHNrAtU0ey5Cv-EYNIRtsakJbaLVXkLqz4PQEo5kzpLBSddAc81qEDnlasuHXL7Klgb_MhroZv05KXPxpVLnh9GXe-uMGSwwP9Sljvf0cxk8O5zqSVQpHYwRXkypOk8OCExvKx57hCFUkhodeuBsp2f18Asqetbg.Y58lbg.cjmvdX94wJWZQS1mkhCzAZGpF18
+
+{
+	"nombre": "Miguel",
+    "fechaNacimiento": "1998-4-3",
+    "numeroTlf": 527685565,
+    "idioma": "Español",
+    "estatura": 185,
+    "peso": 70.00,
+    "genero": "Masculino",
+    "email": "migueltoro@gmail.com",
+    "contrasenya": "4343",
+    "fechaDeAlta": "2000-10-04",
+    "fechaDeBaja": null,
+    "colorPelo": "Rubio",
+    "colorOjos": "Azules",
+    "biografia": "Soy un chico simpatico y extrovertido",
+    "orientacionSexual": "Heterosexual",
+    "metodoPago": "Paypal",
+    "activo": 1,
+    "redesSociales": "miguel",
+    "direccionId": 2
+} 
+
+### Check the created usuarios
+
+@newusuariosid = {{newusuarios.response.body.lastId}}
+GET {{BASE}}/usuarios/{{newusuariosid}}
+Content-Type: application/json 
+
+### Test 04: Add a new usuarios without a session token
+### Negative test 
+POST {{BASE}}/usuarios 
+Content-Type: application/json 
+
+{ 
+	"nombre": "Helena",
+    "fechaNacimiento": "2001-4-3",
+    "numeroTlf": 627745565,
+    "idioma": "Español",
+    "estatura": 185,
+    "peso": 70.00,
+    "genero":"Femenino" ,
+    "email": "helenita@gmail.com",
+    "contrasenya": 5497,
+    "fechaDeAlta": "2002-10-04",
+    "fechaDeBaja": null,
+    "colorPelo": "Rubio",
+    "colorOjos": "Azules",
+    "biografia": "Soy una chica simpatico y extrovertido",
+    "orientacionSexual": "Heterosexual",
+    "metodoPago": "Paypal",
+    "activo": 1,
+    "redesSociales": "helen44",
+    "direccionId": 2
+}
+
+### Test 05: Modify an existing usuarios 
+### Positive test 
+@usuId = 11
+PUT {{BASE}}/usuarios/{{usuId}} 
+Content-Type: application/json 
+Token: .eJxFUcuO1DAQ_JUo2iOzsh07mcyJXYF4iMfAIPaChDp2e9aLY0d-IBbEv2N7BPjW1dXdVeVfPchkvvv-0NEnXb8Yfw6gDZS6v9kgGu9A-Q46C92ao5HQF5r01of3Dz422s9sMf6Dj2jrtv5jLssuqEsBIrrHtnVbvinNDvEemBgPbCTlXe2t_3D3Gu1J2s-3dy_01UxBLEIVChGKT0wOyMmeikkzOlMygFbTyNXI-SBwgUkNemYT11wKwqgc6mFlAkpZHLxS5TArCK5gbBVhs4kmeeelX7Mrrp6ea-u6lHUSY4KUQ9VL96IAGuU9PMMbm5oHVjTvKNkR3v9v3sJDbbps7V_wHUizGnSpJULneV9GdqSpO6PD0PC3EGW2xrW0jDJ-bUeexw2-ZEI09bZ2Vkxe-SOc29ARHjdouPPrErBib4qrhuS1rP5kdQEHPnEuxFhd-FC1QI3khD8ytCheYirkeKkLacNYD0zkmpQqoMJ48tJA_eNLcl8Zq8QcMwTjW7iU_v4DCtKxoA.Y58a-Q.wXfvrtm4utoMnEWnusZg8RETBCA
+
+{ 
+	"nombre": "Luis",
+    "fechaNacimiento": "1998-4-3",
+    "numeroTlf": 347440565,
+    "idioma": "Español",
+    "estatura": 185,
+    "peso": 70.00,
+    "genero": "Masculino",
+    "email": "luisitonocomunica@gmail.com",
+    "contrasenya": "5497",
+    "fechaDeAlta": "2000-10-04",
+    "fechaDeBaja": null,
+    "colorPelo": "Rubio",
+    "colorOjos": "Azules",
+    "biografia": "Apasionado a la musica",
+    "orientacionSexual": "Heterosexual",
+    "metodoPago": "Paypal",
+    "activo": 1,
+    "redesSociales": "lui_22",
+    "direccionId": 2
+}
+
+### Check the modified usuarios
+
+GET {{BASE}}/usuarios/{{newusuariosid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing usuarios without a session token
+### Negative test
+@usuId = 11
+PUT {{BASE}}/usuarios/{{usuId}}
+Content-Type: application/json
+
+{
+	"nombre": "Luis",
+    "fechaNacimiento": "1998-4-3",
+    "numeroTlf": 347440565,
+    "idioma": "Español",
+    "estatura": 185,
+    "peso": 70.00,
+    "genero": "Masculino",
+    "email": "luisitosicomunica@gmail.com",
+    "contrasenya": "5497",
+    "fechaDeAlta": "2000-10-04",
+    "fechaDeBaja": null,
+    "colorPelo": "Rubio",
+    "colorOjos": "Azules",
+    "biografia": "Apasionado a la musica",
+    "orientacionSexual": "Heterosexual",
+    "metodoPago": "Paypal",
+    "activo": 1,
+    "redesSociales": "lui_22",
+    "direccionId": 2
+}
+
+### Test 07: Delete an existing usuarios
+### Positive test
+
+### Create a new usuarios, which we will delete
+# @name createdusuToDelete
+POST {{BASE}}/usuarios
+Content-Type: application/json
+Token: .eJxFUV1v1DAQ_CtR1MdetfYlueSeaGklQAKOtvDEy8ZeX10cO_IH4kD899o-Ffy2s7M7s-M_LYqof7p237DLpp21O3pUGnPdXq8YtLMoXYONwWZJQQtsM0044_znZxcq7XcyFP7BBzJlW3uf8rIzaqPHQPZUt67zD6n4Pjwh74c9HyC_C3a7fuHwAeZvd6eo09cLybiapEIGtNuKDmFgfT_QbmIdbCUfWacIeuqwU_M4Sxi7aZ5x6EAiKOSsCEvtSYh8wXuZhXlGaEFtigmB3rw5lupKuKWQKUSMyReLbOwzoEg84S1dm1ht82xzw2ADXfu_eYPPpWmTMa_gJxR60WRjDYFN05hHNrAtU0ey5Cv-EYNIRtsakJbaLVXkLqz4PQEo5kzpLBSddAc81qEDnlasuHXL7Klgb_MhroZv05KXPxpVLnh9GXe-uMGSwwP9Sljvf0cxk8O5zqSVQpHYwRXkypOk8OCExvKx57hCFUkhodeuBsp2f18Asqetbg.Y58lbg.cjmvdX94wJWZQS1mkhCzAZGpF18
+
+{
+	"nombre": "Lionel",
+    "fechaNacimiento": "1998-4-3",
+    "numeroTlf": 347440065,
+    "idioma": "Español",
+    "estatura": 185,
+    "peso": 70.00,
+    "genero": "Masculino",
+    "email": "messi@gmail.com",
+    "contrasenya": "5497",
+    "fechaDeAlta": "2000-10-04",
+    "fechaDeBaja": null,
+    "colorPelo": "Rubio",
+    "colorOjos": "Azules",
+    "biografia": "Apasionado a la musica",
+    "orientacionSexual": "Heterosexual",
+    "metodoPago": "Paypal",
+    "activo": 1,
+    "redesSociales": "messi10",
+    "direccionId": 2
+}
+
+### Check the created usuarios
+@usudelId = {{createdusuToDelete.response.body.lastId}}
+GET {{BASE}}/usuarios/{{usudelId}}
+Content-Type: application/json 
+
+### Delete the usuarios
+DELETE {{BASE}}/usuarios/{{usudelId}}
+Token: .eJxFUV1v1DAQ_CtR1MdetfYlueSeaGklQAKOtvDEy8ZeX10cO_IH4kD899o-Ffy2s7M7s-M_LYqof7p237DLpp21O3pUGnPdXq8YtLMoXYONwWZJQQtsM0044_znZxcq7XcyFP7BBzJlW3uf8rIzaqPHQPZUt67zD6n4Pjwh74c9HyC_C3a7fuHwAeZvd6eo09cLybiapEIGtNuKDmFgfT_QbmIdbCUfWacIeuqwU_M4Sxi7aZ5x6EAiKOSsCEvtSYh8wXuZhXlGaEFtigmB3rw5lupKuKWQKUSMyReLbOwzoEg84S1dm1ht82xzw2ADXfu_eYPPpWmTMa_gJxR60WRjDYFN05hHNrAtU0ey5Cv-EYNIRtsakJbaLVXkLqz4PQEo5kzpLBSddAc81qEDnlasuHXL7Klgb_MhroZv05KXPxpVLnh9GXe-uMGSwwP9Sljvf0cxk8O5zqSVQpHYwRXkypOk8OCExvKx57hCFUkhodeuBsp2f18Asqetbg.Y58lbg.cjmvdX94wJWZQS1mkhCzAZGpF18
+
+
+### Check the deleted usuarios
+GET {{BASE}}/usuarios/{{usudelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a usuarios without a session token
+### Negative test
+DELETE {{BASE}}/usuarios/1
+

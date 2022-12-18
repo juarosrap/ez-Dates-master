@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'preferenciasgeograficas'",
+        "route": "/preferenciasgeograficas",
+        "method": "GET",
+        "sql": "SELECT * FROM preferenciasgeograficas",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'preferenciasgeograficas' by its primary key",
+        "route": "/preferenciasgeograficas/$prefGeograficaId",
+        "method": "GET",
+        "sql": "SELECT * FROM preferenciasgeograficas WHERE prefGeograficaId = $prefGeograficaId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'preferenciasgeograficas'",
+        "route": "/preferenciasgeograficas",
+        "method": "POST",
+        "sql": "INSERT INTO preferenciasgeograficas (preferenciaId, prefProv, prefMunicipio) VALUES ($preferenciaId, $prefProv, $prefMunicipio)",
+        "request_body_params": [
+            "preferenciaId",
+            "prefProv",
+            "prefMunicipio"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'preferenciasgeograficas' by its primary key",
+        "route": "/preferenciasgeograficas/$prefGeograficaId",
+        "method": "PUT",
+        "sql": "UPDATE preferenciasgeograficas SET preferenciaId = $preferenciaId, prefProv = $prefProv, prefMunicipio = $prefMunicipio WHERE prefGeograficaId = $prefGeograficaId",
+        "request_body_params": [
+            "preferenciaId",
+            "prefProv",
+            "prefMunicipio"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'preferenciasgeograficas' by its primary key",
+        "route": "/preferenciasgeograficas/$prefGeograficaId",
+        "method": "DELETE",
+        "sql": "DELETE FROM preferenciasgeograficas WHERE prefGeograficaId = $prefGeograficaId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

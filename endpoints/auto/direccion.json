@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'direccion'",
+        "route": "/direccion",
+        "method": "GET",
+        "sql": "SELECT * FROM direccion",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'direccion' by its primary key",
+        "route": "/direccion/$direccionId",
+        "method": "GET",
+        "sql": "SELECT FROM direccion WHERE direccionId = $direccionId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'direccion'",
+        "route": "/direccion",
+        "method": "POST",
+        "sql": "INSERT INTO direccion (codigoPostal, municipio, provincia) VALUES ($codigoPostal, $municipio, $provincia)",
+        "request_body_params": [
+            "codigoPostal",
+            "municipio",
+            "provincia"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'direccion' by its primary key",
+        "route": "/direccion/$direccionId",
+        "method": "PUT",
+        "sql": "UPDATE direccion SET codigoPostal = $codigoPostal, municipio = $municipio, provincia = $provincia WHERE direccionId = $direccionId",
+        "request_body_params": [
+            "codigoPostal",
+            "municipio",
+            "provincia"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'direccion' by its primary key",
+        "route": "/direccion/$direccionId",
+        "method": "DELETE",
+        "sql": "DELETE FROM direccion WHERE direccionId = $direccionId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

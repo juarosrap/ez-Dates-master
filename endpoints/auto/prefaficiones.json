@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'prefaficiones'",
+        "route": "/prefaficiones",
+        "method": "GET",
+        "sql": "SELECT * FROM prefaficiones",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'prefaficiones' by its primary key",
+        "route": "/prefaficiones/$preferenciaAficionesId",
+        "method": "GET",
+        "sql": "SELECT FROM prefaficiones WHERE preferenciaAficionesId = $preferenciaAficionesId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'prefaficiones'",
+        "route": "/prefaficiones",
+        "method": "POST",
+        "sql": "INSERT INTO prefaficiones (preferenciaId, aficion) VALUES ($preferenciaId, $aficion)",
+        "request_body_params": [
+            "preferenciaId",
+            "aficion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'prefaficiones' by its primary key",
+        "route": "/prefaficiones/$preferenciaAficionesId",
+        "method": "PUT",
+        "sql": "UPDATE prefaficiones SET preferenciaId = $preferenciaId, aficion = $aficion WHERE preferenciaAficionesId = $preferenciaAficionesId",
+        "request_body_params": [
+            "preferenciaId",
+            "aficion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'prefaficiones' by its primary key",
+        "route": "/prefaficiones/$preferenciaAficionesId",
+        "method": "DELETE",
+        "sql": "DELETE FROM prefaficiones WHERE preferenciaAficionesId = $preferenciaAficionesId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

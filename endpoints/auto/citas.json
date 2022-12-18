@@ -1,0 +1,70 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'citas'",
+        "route": "/citas",
+        "method": "GET",
+        "sql": "SELECT * FROM citas",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'citas' by its primary key",
+        "route": "/citas/$citasId",
+        "method": "GET",
+        "sql": "SELECT * FROM citas WHERE citasId = $citasId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'citas'",
+        "route": "/citas",
+        "method": "POST",
+        "sql": "INSERT INTO citas (nombres, fecha, lugar, relacionesId, usuarioId, fechaInicio, fechaFinalizacion) VALUES ($nombres, $fecha, $lugar, $relacionesId, $usuarioId, $fechaInicio, $fechaFinalizacion)",
+        "request_body_params": [
+            "nombres",
+            "fecha",
+            "lugar",
+            "relacionesId",
+            "usuarioId",
+            "fechaInicio",
+            "fechaFinalizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'citas' by its primary key",
+        "route": "/citas/$citasId",
+        "method": "PUT",
+        "sql": "UPDATE citas SET nombres = $nombres, fecha = $fecha, lugar = $lugar, relacionesId = $relacionesId, usuarioId = $usuarioId, fechaInicio = $fechaInicio, fechaFinalizacion = $fechaFinalizacion WHERE citasId = $citasId",
+        "request_body_params": [
+            "nombres",
+            "fecha",
+            "lugar",
+            "relacionesId",
+            "usuarioId",
+            "fechaInicio",
+            "fechaFinalizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'citas' by its primary key",
+        "route": "/citas/$citasId",
+        "method": "DELETE",
+        "sql": "DELETE FROM citas WHERE citasId = $citasId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

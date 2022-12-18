@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'prefojos'",
+        "route": "/prefojos",
+        "method": "GET",
+        "sql": "SELECT * FROM prefojos",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'prefojos' by its primary key",
+        "route": "/prefojos/$prefOjosId",
+        "method": "GET",
+        "sql": "SELECT FROM prefojos WHERE prefOjosId = $prefOjosId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'prefojos'",
+        "route": "/prefojos",
+        "method": "POST",
+        "sql": "INSERT INTO prefojos (preferenciaId, ojos) VALUES ($preferenciaId, $ojos)",
+        "request_body_params": [
+            "preferenciaId",
+            "ojos"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'prefojos' by its primary key",
+        "route": "/prefojos/$prefOjosId",
+        "method": "PUT",
+        "sql": "UPDATE prefojos SET preferenciaId = $preferenciaId, ojos = $ojos WHERE prefOjosId = $prefOjosId",
+        "request_body_params": [
+            "preferenciaId",
+            "ojos"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'prefojos' by its primary key",
+        "route": "/prefojos/$prefOjosId",
+        "method": "DELETE",
+        "sql": "DELETE FROM prefojos WHERE prefOjosId = $prefOjosId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

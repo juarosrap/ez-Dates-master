@@ -1,0 +1,94 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'usuarios'",
+        "route": "/usuarios",
+        "method": "GET",
+        "sql": "SELECT * FROM usuarios",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'usuarios' by its primary key",
+        "route": "/usuarios/$usuarioId",
+        "method": "GET",
+        "sql": "SELECT * FROM usuarios WHERE usuarioId = $usuarioId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'usuarios'",
+        "route": "/usuarios",
+        "method": "POST",
+        "sql": "INSERT INTO usuarios (nombre, fechaNacimiento, numeroTlf, idioma, estatura, peso, genero, email, contrasenya, fechaDeAlta, fechaDeBaja, colorPelo, colorOjos, biografia, orientacionSexual, metodoPago, activo, redesSociales, direccionId) VALUES ($nombre, $fechaNacimiento, $numeroTlf, $idioma, $estatura, $peso, $genero, $email, $contrasenya, $fechaDeAlta, $fechaDeBaja, $colorPelo, $colorOjos, $biografia, $orientacionSexual, $metodoPago, $activo, $redesSociales, $direccionId)",
+        "request_body_params": [
+            "nombre",
+            "fechaNacimiento",
+            "numeroTlf",
+            "idioma",
+            "estatura",
+            "peso",
+            "genero",
+            "email",
+            "contrasenya",
+            "fechaDeAlta",
+            "fechaDeBaja",
+            "colorPelo",
+            "colorOjos",
+            "biografia",
+            "orientacionSexual",
+            "metodoPago",
+            "activo",
+            "redesSociales",
+            "direccionId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'usuarios' by its primary key",
+        "route": "/usuarios/$usuarioId",
+        "method": "PUT",
+        "sql": "UPDATE usuarios SET nombre = $nombre, fechaNacimiento = $fechaNacimiento, numeroTlf = $numeroTlf, idioma = $idioma, estatura = $estatura, peso = $peso, genero = $genero, email = $email, contrasenya = $contrasenya, fechaDeAlta = $fechaDeAlta, fechaDeBaja = $fechaDeBaja, colorPelo = $colorPelo, colorOjos = $colorOjos, biografia = $biografia, orientacionSexual = $orientacionSexual, metodoPago = $metodoPago, activo = $activo, redesSociales = $redesSociales, direccionId = $direccionId WHERE usuarioId = $usuarioId",
+        "request_body_params": [
+            "nombre",
+            "fechaNacimiento",
+            "numeroTlf",
+            "idioma",
+            "estatura",
+            "peso",
+            "genero",
+            "email",
+            "contrasenya",
+            "fechaDeAlta",
+            "fechaDeBaja",
+            "colorPelo",
+            "colorOjos",
+            "biografia",
+            "orientacionSexual",
+            "metodoPago",
+            "activo",
+            "redesSociales",
+            "direccionId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'usuarios' by its primary key",
+        "route": "/usuarios/$usuarioId",
+        "method": "DELETE",
+        "sql": "DELETE FROM usuarios WHERE usuarioId = $usuarioId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

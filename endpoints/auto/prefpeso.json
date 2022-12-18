@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'prefpeso'",
+        "route": "/prefpeso",
+        "method": "GET",
+        "sql": "SELECT * FROM prefpeso",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'prefpeso' by its primary key",
+        "route": "/prefpeso/$prefPesoId",
+        "method": "GET",
+        "sql": "SELECT FROM prefpeso WHERE prefPesoId = $prefPesoId",
+        "auth_required": false,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'prefpeso'",
+        "route": "/prefpeso",
+        "method": "POST",
+        "sql": "INSERT INTO prefpeso (preferenciaId, MaximoPeso, MinimoPeso) VALUES ($preferenciaId, $MaximoPeso, $MinimoPeso)",
+        "request_body_params": [
+            "preferenciaId",
+            "MaximoPeso",
+            "MinimoPeso"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'prefpeso' by its primary key",
+        "route": "/prefpeso/$prefPesoId",
+        "method": "PUT",
+        "sql": "UPDATE prefpeso SET preferenciaId = $preferenciaId, MaximoPeso = $MaximoPeso, MinimoPeso = $MinimoPeso WHERE prefPesoId = $prefPesoId",
+        "request_body_params": [
+            "preferenciaId",
+            "MaximoPeso",
+            "MinimoPeso"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'prefpeso' by its primary key",
+        "route": "/prefpeso/$prefPesoId",
+        "method": "DELETE",
+        "sql": "DELETE FROM prefpeso WHERE prefPesoId = $prefPesoId",
+        "auth_required": true,
+        "allowed_roles": [
+            ""
+        ]
+    }
+}

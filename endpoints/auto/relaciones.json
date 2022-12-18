@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'relaciones'",
+        "route": "/relaciones",
+        "method": "GET",
+        "sql": "SELECT * FROM relaciones",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'relaciones' by its primary key",
+        "route": "/relaciones/$relacionesId",
+        "method": "GET",
+        "sql": "SELECT * FROM relaciones WHERE relacionesId = $relacionesId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'relaciones'",
+        "route": "/relaciones",
+        "method": "POST",
+        "sql": "INSERT INTO relaciones (componentes, fechaInicio, fechaFinalizacion) VALUES ($componentes, $fechaInicio, $fechaFinalizacion)",
+        "request_body_params": [
+            "componentes",
+            "fechaInicio",
+            "fechaFinalizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'relaciones' by its primary key",
+        "route": "/relaciones/$relacionesId",
+        "method": "PUT",
+        "sql": "UPDATE relaciones SET componentes = $componentes, fechaInicio = $fechaInicio, fechaFinalizacion = $fechaFinalizacion WHERE relacionesId = $relacionesId",
+        "request_body_params": [
+            "componentes",
+            "fechaInicio",
+            "fechaFinalizacion"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'relaciones' by its primary key",
+        "route": "/relaciones/$relacionesId",
+        "method": "DELETE",
+        "sql": "DELETE FROM relaciones WHERE relacionesId = $relacionesId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

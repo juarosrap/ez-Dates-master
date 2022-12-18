@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'vinculosamistades'",
+        "route": "/vinculosamistades",
+        "method": "GET",
+        "sql": "SELECT * FROM vinculosamistades",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'vinculosamistades' by its primary key",
+        "route": "/vinculosamistades/$vinculoAmistadesId",
+        "method": "GET",
+        "sql": "SELECT * FROM vinculosamistades WHERE vinculoAmistadesId = $vinculoAmistadesId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'vinculosamistades'",
+        "route": "/vinculosamistades",
+        "method": "POST",
+        "sql": "INSERT INTO vinculosamistades (usuarioId, relacionesId, vinculoActivo) VALUES ($usuarioId, $relacionesId, $vinculoActivo)",
+        "request_body_params": [
+            "usuarioId",
+            "relacionesId",
+            "vinculoActivo"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'vinculosamistades' by its primary key",
+        "route": "/vinculosamistades/$vinculoAmistadesId",
+        "method": "PUT",
+        "sql": "UPDATE vinculosamistades SET usuarioId = $usuarioId, relacionesId = $relacionesId, vinculoActivo = $vinculoActivo WHERE vinculoAmistadesId = $vinculoAmistadesId",
+        "request_body_params": [
+            "usuarioId",
+            "relacionesId",
+            "vinculoActivo"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'vinculosamistades' by its primary key",
+        "route": "/vinculosamistades/$vinculoAmistadesId",
+        "method": "DELETE",
+        "sql": "DELETE FROM vinculosamistades WHERE vinculoAmistadesId = $vinculoAmistadesId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

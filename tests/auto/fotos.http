@@ -1,0 +1,173 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8080/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing fotos
+### This query is used in several of the below tests it should be executed first.
+# @name fotos
+GET {{BASE}}/fotos
+
+### Login a(n) usuarios and save the generated token 
+POST {{BASE}}/register 
+Content-Type: application/json 
+
+{ 
+	"nombre": "Gabriel",
+    "fechaNacimiento": "1998-4-3",
+    "numeroTlf": 356239055,
+    "idioma": "Español",
+    "estatura": 143,
+    "peso": 56.00,
+    "genero": "Masculino",
+    "email": "gabi@gmail.com",
+    "contrasenya": "5499",
+    "fechaDeAlta": "2000-10-04",
+    "fechaDeBaja": null,
+    "colorPelo": "Rubio",
+    "colorOjos": "Verdes",
+    "biografia": "Aficionado al flamenco",
+    "orientacionSexual": "Heterosexual",
+    "metodoPago": "Paypal",
+    "activo": 1,
+    "redesSociales": "ga_var",
+    "direccionId": 2
+}
+
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"email": "gabi@gmail.com",
+	"contrasenya": "5499"
+}
+
+###
+@token = .eJxFkVtv1DAQhf_KKuojW_kS57JPFIFaHgpbWvUBIaGJPU69deyVHVdUiP-O7Qiat_nmzMzxye8G5GpefHPY0Xe7ZjJ-DqAN5Lq50kYa70D5HdidtrCgk77JMumtD19PPhbZIwaF8T8-oi3bmm8pL9uoWwNEdK9163l6Vpod4hMw0R1YR_J3MZxOs_ye7sjt8VqkO3mBhLJ-GEmrFQwddJKKno2MoGiRUsJHpXveQ8-x01p0bd9zzoEpKttpHCZaDisTUJYXfFb5MMsEFzC2mJhhMu_nUl1KvxQxxhXWFIpF2vIMNMon-IhXdq22Wba5p2RP2uat-QFOpemStf_gF5BmMejWGgIdxyGP7AkvUzM6DJXfQpTJGlcDMsr4pR75FM_wIxGiqbels-DqlT_CXIeO8HqGyp1fpoCFXcMUDG4wLXn7g9WZc9ExPhIhMveh2IESxD3-SlADuME1i-NWZ9EZY7khukuSq4D5j957acBi3PL6-QKhCFNMEIzfIiV__gIw3q17.Y59WXg.0U4t9TxefdY8COveezMNLGi_ksE
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing fotos by its id.
+### positive test 
+
+GET {{BASE}}/fotos/4 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing fotos by its nonexistent id.
+### negative test 
+GET {{BASE}}/fotos/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new fotos successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newfotos
+POST {{BASE}}/fotos 
+Content-Type: application/json 
+Token: .eJxFkVtv1DAQhf_KKuojW_kS57JPFIFaHgpbWvUBIaGJPU69deyVHVdUiP-O7Qiat_nmzMzxye8G5GpefHPY0Xe7ZjJ-DqAN5Lq50kYa70D5HdidtrCgk77JMumtD19PPhbZIwaF8T8-oi3bmm8pL9uoWwNEdK9163l6Vpod4hMw0R1YR_J3MZxOs_ye7sjt8VqkO3mBhLJ-GEmrFQwddJKKno2MoGiRUsJHpXveQ8-x01p0bd9zzoEpKttpHCZaDisTUJYXfFb5MMsEFzC2mJhhMu_nUl1KvxQxxhXWFIpF2vIMNMon-IhXdq22Wba5p2RP2uat-QFOpemStf_gF5BmMejWGgIdxyGP7AkvUzM6DJXfQpTJGlcDMsr4pR75FM_wIxGiqbels-DqlT_CXIeO8HqGyp1fpoCFXcMUDG4wLXn7g9WZc9ExPhIhMveh2IESxD3-SlADuME1i-NWZ9EZY7khukuSq4D5j957acBi3PL6-QKhCFNMEIzfIiV__gIw3q17.Y59WXg.0U4t9TxefdY8COveezMNLGi_ksE 
+
+{
+	"url": "http/servidor1/imagen20.jpg",
+	"nombre": "Parque",
+	"descripcion": "mi perro y yo en el parque",
+	"meGustas": 230,
+	"usuarioId": 8
+} 
+
+### Check the created fotos
+
+@newfotosid = {{newfotos.response.body.lastId}}
+GET {{BASE}}/fotos/{{newfotosid}}
+Content-Type: application/json 
+
+### Test 04: Add a new fotos without a session token
+### Negative test 
+POST {{BASE}}/fotos 
+Content-Type: application/json 
+
+{ 
+	"url": "http/server/image345.jpg",
+	"nombre": "image345",
+	"descripcion": "De camino al cine",
+	"meGustas": 34,
+	"usuarioId": 6
+}
+
+### Test 05: Modify an existing fotos 
+### Positive test 
+@fotId = {{fotos.response.body.0.fotosId}} 
+PUT {{BASE}}/fotos/6
+Content-Type: application/json 
+Token: .eJxFkVtv1DAQhf_KKuojW_kS57JPFIFaHgpbWvUBIaGJPU69deyVHVdUiP-O7Qiat_nmzMzxye8G5GpefHPY0Xe7ZjJ-DqAN5Lq50kYa70D5HdidtrCgk77JMumtD19PPhbZIwaF8T8-oi3bmm8pL9uoWwNEdK9163l6Vpod4hMw0R1YR_J3MZxOs_ye7sjt8VqkO3mBhLJ-GEmrFQwddJKKno2MoGiRUsJHpXveQ8-x01p0bd9zzoEpKttpHCZaDisTUJYXfFb5MMsEFzC2mJhhMu_nUl1KvxQxxhXWFIpF2vIMNMon-IhXdq22Wba5p2RP2uat-QFOpemStf_gF5BmMejWGgIdxyGP7AkvUzM6DJXfQpTJGlcDMsr4pR75FM_wIxGiqbels-DqlT_CXIeO8HqGyp1fpoCFXcMUDG4wLXn7g9WZc9ExPhIhMveh2IESxD3-SlADuME1i-NWZ9EZY7khukuSq4D5j957acBi3PL6-QKhCFNMEIzfIiV__gIw3q17.Y59WXg.0U4t9TxefdY8COveezMNLGi_ksE
+
+{ 
+	"url": "imagen14.jpg",
+	"nombre": "playa",
+	"descripcion": "Mis amigos y yo disfrutando de un d\u00eda en la discoteca abril",
+	"meGustas": 360,
+	"usuarioId": 5
+}
+
+### Check the modified fotos
+
+GET {{BASE}}/fotos/6
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing fotos without a session token
+### Negative test
+@fotId = 5
+PUT {{BASE}}/fotos/{{fotId}}
+Content-Type: application/json
+
+{
+	"url": "imagen13.jpg",
+	"nombre": "playa",
+	"descripcion": "Mis amigos y yo disfrutando de un d\u00eda en la uni",
+	"meGustas": 567,
+	"usuarioId": 3
+}
+
+### Test 07: Delete an existing fotos
+### Positive test
+
+### Create a new fotos, which we will delete
+# @name createdfotToDelete
+POST {{BASE}}/fotos
+Content-Type: application/json
+Token: .eJxFkVtv1DAQhf_KKuojW_kS57JPFIFaHgpbWvUBIaGJPU69deyVHVdUiP-O7Qiat_nmzMzxye8G5GpefHPY0Xe7ZjJ-DqAN5Lq50kYa70D5HdidtrCgk77JMumtD19PPhbZIwaF8T8-oi3bmm8pL9uoWwNEdK9163l6Vpod4hMw0R1YR_J3MZxOs_ye7sjt8VqkO3mBhLJ-GEmrFQwddJKKno2MoGiRUsJHpXveQ8-x01p0bd9zzoEpKttpHCZaDisTUJYXfFb5MMsEFzC2mJhhMu_nUl1KvxQxxhXWFIpF2vIMNMon-IhXdq22Wba5p2RP2uat-QFOpemStf_gF5BmMejWGgIdxyGP7AkvUzM6DJXfQpTJGlcDMsr4pR75FM_wIxGiqbels-DqlT_CXIeO8HqGyp1fpoCFXcMUDG4wLXn7g9WZc9ExPhIhMveh2IESxD3-SlADuME1i-NWZ9EZY7khukuSq4D5j957acBi3PL6-QKhCFNMEIzfIiV__gIw3q17.Y59WXg.0U4t9TxefdY8COveezMNLGi_ksE
+
+{
+	"url": "http/server3/image23.png",
+	"nombre": "perro",
+	"descripcion": "mi perro y yo",
+	"meGustas": 34,
+	"usuarioId": 4
+}
+
+### Check the created fotos
+@fotdelId = {{createdfotToDelete.response.body.lastId}}
+GET {{BASE}}/fotos/{{fotdelId}}
+Content-Type: application/json 
+
+### Delete the fotos
+DELETE {{BASE}}/fotos/{{fotdelId}}
+Token: .eJxFkVtv1DAQhf_KKuojW_kS57JPFIFaHgpbWvUBIaGJPU69deyVHVdUiP-O7Qiat_nmzMzxye8G5GpefHPY0Xe7ZjJ-DqAN5Lq50kYa70D5HdidtrCgk77JMumtD19PPhbZIwaF8T8-oi3bmm8pL9uoWwNEdK9163l6Vpod4hMw0R1YR_J3MZxOs_ye7sjt8VqkO3mBhLJ-GEmrFQwddJKKno2MoGiRUsJHpXveQ8-x01p0bd9zzoEpKttpHCZaDisTUJYXfFb5MMsEFzC2mJhhMu_nUl1KvxQxxhXWFIpF2vIMNMon-IhXdq22Wba5p2RP2uat-QFOpemStf_gF5BmMejWGgIdxyGP7AkvUzM6DJXfQpTJGlcDMsr4pR75FM_wIxGiqbels-DqlT_CXIeO8HqGyp1fpoCFXcMUDG4wLXn7g9WZc9ExPhIhMveh2IESxD3-SlADuME1i-NWZ9EZY7khukuSq4D5j957acBi3PL6-QKhCFNMEIzfIiV__gIw3q17.Y59WXg.0U4t9TxefdY8COveezMNLGi_ksE
+
+
+### Check the deleted fotos
+GET {{BASE}}/fotos/{{fotdelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a fotos without a session token
+### Negative test
+DELETE {{BASE}}/fotos/{{fotId}}
+

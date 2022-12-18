@@ -1,0 +1,52 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'solicitudesamistades'",
+        "route": "/solicitudesamistades",
+        "method": "GET",
+        "sql": "SELECT * FROM solicitudesamistades",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'solicitudesamistades' by its primary key",
+        "route": "/solicitudesamistades/$solicitudesAmistadesId",
+        "method": "GET",
+        "sql": "SELECT * FROM solicitudesamistades WHERE solicitudesAmistadesId = $solicitudesAmistadesId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'solicitudesamistades'",
+        "route": "/solicitudesamistades",
+        "method": "POST",
+        "sql": "INSERT INTO solicitudesamistades (usuarioSolicitado, usuarioSolicitante, vinculosAmistadesId, fechaSolicitud, fechaAceptacion, fechaRevocacion, fechaRevocacionAceptacionCumplimentada, vinculoActivo) VALUES ($usuarioSolicitado, $usuarioSolicitante, $vinculosAmistadesId, $fechaSolicitud, $fechaAceptacion, $fechaRevocacion, $fechaRevocacionAceptacionCumplimentada, $vinculoActivo)",
+        "request_body_params": [
+            "usuarioSolicitado",
+            "usuarioSolicitante",
+            "vinculosAmistadesId",
+            "fechaSolicitud",
+            "fechaAceptacion",
+            "fechaRevocacion",
+            "fechaRevocacionAceptacionCumplimentada",
+            "vinculoActivo"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'solicitudesamistades' by its primary key",
+        "route": "/solicitudesamistades/$solicitudesAmistadesId",
+        "method": "DELETE",
+        "sql": "DELETE FROM solicitudesamistades WHERE solicitudesAmistadesId = $solicitudesAmistadesId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}
